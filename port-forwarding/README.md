@@ -9,6 +9,11 @@ In short port forwarding is a NAT application that redirects requests from one a
 2. Go to port-forwarding page and add new port maping application SSH (port 22) to a raspberry pi
    ![port-mapping-screenshot](/port-forwarding/Screenshot%20from%202023-03-17%2022-12-19.png)
 3. Check here https://www.yougetsignal.com/tools/open-ports/ if is port 22 opened. If it's opened you can SSH into your raspberry through IP address of network where raspberry is connected.
+   - If port 22 aren't opened, you can install ufw. `sudo apt-get install ufw`
+   - `sudo ufw allow ssh`
+   - `sudo ufw enable`
+   - `sudo ufw status`
+     ![ufw-status-screenshot](Screenshot%20from%202023-03-18%2011-19-22.png)
 
 - You can buy a domain and configure it to point to your ip address of a Raspberry Pi. The problem is when a network provider change the ip address of a Raspberry Pi network. You need to set up a dynamic DNS which will update your IP to your domain provider. I'm using https://www.namecheap.com/ which has option to update your IP address a HTTP request.
 
