@@ -12,7 +12,9 @@ Fail2ban is a software that attempts to block and ban bots and users who trying 
 3. Open jail.local in nano `sudo nano /etc/fail2ban/jail.local`
 4. With Ctrl+W you can search for [sshd] and add some parameters
    ![jail.local-screenshot](Screenshot%20from%202023-03-18%2012-03-52.png)
+
    You can modify bantime and maxretry according to your needs.
+
 5. Save changes and exit (Ctrl+x and y and hit enter)
 6. `sudo service fail2ban restart`
 
