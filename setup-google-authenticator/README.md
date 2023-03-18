@@ -8,7 +8,9 @@
 2. Configure sshd_config
    `sudo nano /etc/ssh/sshd_config`
    Find `ChallengeResponseAuthentication` and change to `yes`
-   Exit nano - Ctrl+x and y
+
+   Exit nano - Ctrl+x and y and hit enter
+
    ![screenshot-sshd-config](Screenshot%20from%202023-03-18%2011-27-36.png)
 
 3. Navigate to `sudo nano /etc/pam.d/sshd` - [More about PAM](https://www.tecmint.com/configure-pam-in-centos-ubuntu-linux/)
