@@ -1,39 +1,48 @@
-![google-auth-logo](https://imgs.search.brave.com/cVBBbILbEJQmNpcAZN1UBunpfS5VtRHdkCTe5Anhs50/rs:fit:299:299:1/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vYXBwc2xv/dmEuY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDE4LzAzL0dv/b2dsZS1BdXRoZW50/aWNhdG9yLWxvZ28u/anBn)
+<div align=center><img src="https://imgs.search.brave.com/cVBBbILbEJQmNpcAZN1UBunpfS5VtRHdkCTe5Anhs50/rs:fit:299:299:1/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vYXBwc2xv/dmEuY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDE4LzAzL0dv/b2dsZS1BdXRoZW50/aWNhdG9yLWxvZ28u/anBn" alt="google-auth-logo" /></div>
 
 # Setup a google authenticator
 
+---
+
 1. Installing
-   `sudo apt-get install libpam-google-authenticator`
+
+   - `sudo apt-get install libpam-google-authenticator`
 
 2. Configure sshd_config
-   `sudo nano /etc/ssh/sshd_config`
-   Find `ChallengeResponseAuthentication` and change to `yes`
 
-   Exit nano - Ctrl+x and y and hit enter
+   - `sudo nano /etc/ssh/sshd_config`
+   - Find `ChallengeResponseAuthentication` and change to `yes`
+   - Exit nano - Ctrl+x and y and hit enter
 
-   ![screenshot-sshd-config](Screenshot%20from%202023-03-18%2011-27-36.png)
+<div align="center"><img src="./src/sshd_config.png" alt="google-auth-logo" /></div>
 
-3. Navigate to `sudo nano /etc/pam.d/sshd` - [More about PAM](https://www.tecmint.com/configure-pam-in-centos-ubuntu-linux/)
-   Add 2fa before @include common-auth. You need to enter 2fa code first, then your password.
+3. Open /etc/pam.d/sshd - [More about PAM](https://www.tecmint.com/configure-pam-in-centos-ubuntu-linux/)
 
+   - `sudo nano /etc/pam.d/sshd`
+   - Add 2fa above @include common-auth. You need to enter 2fa code first, then your password.
    - `auth required pam_google_authenticator.so`
-     ![screenshot-pam.d-sshd](Screenshot%20from%202023-03-18%2011-37-45.png)
 
-4. `sudo systemctl restart ssh`
+<div align="center"><img src="./src/pam.d_sshd.png" alt="screenshot-pam.d-sshd" /></div>
 
-- Now when you configure these settings, you can type `google-authenticator` and follow on screen instruction.
+4. And restart SSH
+   - `sudo systemctl restart ssh`
 
-  1. Time-based tokens - `y`
-     1. Scan QR code or enter secret key in google authenticator app
-     2. Enter code from a google auth
-     3. Save your emergency codes on a safe place
-  2. Update your /home/pi/.google_authenticator file - `y`
-  3. Disallowing multiple uses of same token - `y`
-  4. Poor synchronization adjustment - `n`
-  5. Limit to 3 logins per 30 seconds - `y`
+---
 
-Try if it works
+Now when you configure these settings, you can type `google-authenticator` and follow on screen instruction.
 
-![check-google-auth](Screenshot%20from%202023-03-18%2011-53-14.png)
+- [x] Time-based tokens - `y`
+  1.  Scan QR code or secret key in google authenticator app
+  2.  Enter a code from a google auth
+  3.  Save your emergency codes on a safe place
+- [x] Update your /home/pi/.google.authenticator file - `y`
+- [x] Disallowing multiple uses of same token - `y`
+- [ ] Poor synchronization adjustment - `n`
+- [x] Limit to 3 logins per 30 seconds - `y`
 
-You have successfully setup a google-auth, if you want to setup a fail2ban check [this](https://github.com/mvisnjic/RPI-tutorials/tree/main/setup-fail2ban)
+---
+
+- Try if it works
+<div align="center"><img src="./src/check-google-auth.png" alt="check-google-auth" /></div>
+
+> You have successfully setup a google-auth. I recommend you to setup a fail2ban - [fail2ban tutorial](https://github.com/mvisnjic/RPI-tutorials/tree/main/setup-fail2ban) or check my other tutorials: [RPI-tutorials](https://github.com/mvisnjic/RPI-tutorials#readme)
